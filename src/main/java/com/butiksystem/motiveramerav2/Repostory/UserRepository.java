@@ -1,6 +1,6 @@
 package com.butiksystem.motiveramerav2.Repostory;
 
-import org.apache.catalina.User;
+import com.butiksystem.motiveramerav2.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
