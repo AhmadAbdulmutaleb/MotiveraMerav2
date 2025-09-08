@@ -17,23 +17,12 @@ public class Reward {
     @Column(nullable = false)
     private int costInPoints;
 
-    @ManyToOne
-    @JoinColumn(name = "for_child_id")
-    private User forStudent;  // Vilket barn får denna reward
 
-    @ManyToOne
-    @JoinColumn(name = "created_by_parent_id")
-    private User createdByParent;  // Vilken förälder skapade den
 
-    @Column (nullable = false)
-    private boolean claimed = false;
-
-    @Column (name = "claimed_date")
-    private LocalDateTime claimedDate;
 
     public Reward() {}
 
-    public Reward(String name, int costInPoints, User forStudent, User createdByParent) {
+    public Reward(String name, int costInPoints) {
         this.name = name;
         this.costInPoints = costInPoints;
     }
@@ -62,35 +51,5 @@ public class Reward {
         this.costInPoints = costInPoints;
     }
 
-    public User getForStudent() {
-        return forStudent;
-    }
 
-    public void setForStudent(User forStudent) {
-        this.forStudent = forStudent;
-    }
-
-    public User getCreatedByParent() {
-        return createdByParent;
-    }
-
-    public void setCreatedByParent(User createdByParent) {
-        this.createdByParent = createdByParent;
-    }
-
-    public boolean isClaimed() {
-        return claimed;
-    }
-
-    public void setClaimed(boolean claimed) {
-        this.claimed = claimed;
-    }
-
-    public LocalDateTime getClaimedDate() {
-        return claimedDate;
-    }
-
-    public void setClaimedDate(LocalDateTime claimedDate) {
-        this.claimedDate = claimedDate;
-    }
 }

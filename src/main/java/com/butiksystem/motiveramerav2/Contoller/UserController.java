@@ -1,6 +1,7 @@
 package com.butiksystem.motiveramerav2.Contoller;
 
 
+import com.butiksystem.motiveramerav2.DTO.UserRegistrationDTO;
 import com.butiksystem.motiveramerav2.Entity.User;
 import com.butiksystem.motiveramerav2.Service.UserService;
 
@@ -44,7 +45,7 @@ public class UserController {
         return userService.findUserByEmail(email).orElse(null);
     }
 
-    @PutMapping("/users/{id}")
+    @PatchMapping("/users/{id}")
     public User updateUser(@PathVariable int id, @RequestBody User user) {
         return userService.updateUser(id, user);
     }
