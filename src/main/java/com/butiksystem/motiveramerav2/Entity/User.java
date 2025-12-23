@@ -2,12 +2,12 @@ package com.butiksystem.motiveramerav2.Entity;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
+import com.butiksystem.motiveramerav2.Entity.Role;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -32,9 +32,16 @@ public class User {
     @Column (nullable = false)
     private String password;
 
-    @NotBlank(message = "Du måste välja kontotyp")
+    @NotNull(message = "Du måste välja kontotyp")
     @Column (nullable = false)
-    private String Role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ParentStudentRelationship> student = new HashSet<>();
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ParentStudentRelationship> parent = new HashSet<>();
 
    @Column
    @Min(value = 0)
@@ -44,14 +51,16 @@ public class User {
     @Column (name = "created_date")
     private LocalDateTime createdDate = LocalDateTime.now();
 
+
+
     public User () {}
 
-    public User(String name, String email, String password, String role ) {
+    public User(String name, String email, String password, Role role ) {
 
         this.name = name;
         this.email = email;
         this.password = password;
-        Role = role;
+        this.role = role;
 
     }
 
@@ -88,12 +97,28 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
-        return Role;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRole(String role) {
-        Role = role;
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Set<ParentStudentRelationship> getStudent() {
+        return student;
+    }
+
+    public void setStudent(Set<ParentStudentRelationship> student) {
+        this.student = student;
+    }
+
+    public Set<ParentStudentRelationship> getParent() {
+        return parent;
+    }
+
+    public void setParent(Set<ParentStudentRelationship> parent) {
+        this.parent = parent;
     }
 
     public int getPoints() {

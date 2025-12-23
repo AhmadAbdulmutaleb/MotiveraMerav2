@@ -14,9 +14,13 @@ public class RewardService {
     private RewardRepository rewardRepository;
 
 
-    //Hämta alla tillgängliga rewards för student
+    //Hämta alla tillgängliga rewards
     public List<Reward> getRewardForStudent(int studentId) {
-        return rewardRepository.findByForStudentId(studentId);
+        return rewardRepository.findAll(); // Returnera alla tills vidare
+    }
+
+    public Reward addReward (Reward reward) {
+        return rewardRepository.save(reward);
     }
 
 
